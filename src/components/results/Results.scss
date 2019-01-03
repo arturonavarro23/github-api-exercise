@@ -1,0 +1,13 @@
+.repo-results {
+   text-align: left;
+   .header {
+      padding: 30px 0; 
+   }
+   .result {
+      padding: 10px 0;
+      cursor: pointer;
+   }
+   .no-results {
+      text-align: center;
+   }
+}
