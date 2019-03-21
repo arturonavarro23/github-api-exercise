@@ -13,18 +13,14 @@ class App extends Component {
     commentsModalOpen: false,
     isFetchingComments: false,
     comments: [],
-  }
-
-  componentDidMount = () => {
-    this.searchResults('demo');
+    inputValue: '',
   }
 
   onSearchFormSubmit = event => {
     event.preventDefault();
-    const form = document.querySelector('#searchForm');
-    const { elements: { search } } = form;
-    if (search && search.value) {
-      this.searchResults(search.value);
+    const { inputValue } = this.state;
+    if (inputValue) {
+      this.searchResults(inputValue);
     }
   }
 
@@ -79,9 +75,23 @@ class App extends Component {
         });
       });
   }
+
+  onInputChange = (e) => {
+    this.setState({
+      inputValue: e.target.value,
+    });
+  }
   
   render() {
-    const { repositories, isFetchingRepos, commentsModalOpen, isFetchingComments, comments } = this.state;
+    const {
+      repositories,
+      isFetchingRepos,
+      commentsModalOpen,
+      isFetchingComments,
+      comments,
+      inputValue,
+    } = this.state;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -92,7 +102,11 @@ class App extends Component {
         <Grid>
           <Row>
             <Col xs={12}>
-              <Form id="searchForm" onSubmit={this.onSearchFormSubmit} />
+              <Form
+                inputValue={inputValue}
+                onSubmit={this.onSearchFormSubmit}
+                onInputChange={this.onInputChange}
+              />
             </Col>
           </Row>
           <Results 

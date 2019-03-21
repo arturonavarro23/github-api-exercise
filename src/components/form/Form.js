@@ -3,11 +3,17 @@ import { Form as BootstrapForm, FormGroup, FormControl, Button } from 'react-boo
 import './Form.scss';
 
 const Form = (props) => {
-   const { id, onSubmit } = props;
+   const { id, onSubmit, inputValue, onInputChange } = props;
    return (
       <BootstrapForm inline id={id} className="search-form" onSubmit={onSubmit}>
          <FormGroup>
-            <FormControl name="search" type="text" placeholder="e.g. react" />
+            <FormControl
+               value={inputValue}
+               name="search"
+               type="text"
+               placeholder="e.g. react"
+               onChange={onInputChange}
+            />
          </FormGroup>
          <Button type="submit">Search</Button>
       </BootstrapForm>
