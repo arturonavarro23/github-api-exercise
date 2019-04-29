@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Grid, Row, Col, Image } from 'react-bootstrap';
-import withLoader from '../../hoc/withLoader';
+import withLoader from '../.././../../hoc/withLoader';
 import './Results.scss';
 
 class Results extends PureComponent {

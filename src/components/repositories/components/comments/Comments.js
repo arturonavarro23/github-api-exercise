@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import withLoader from '../../hoc/withLoader';
+import withLoader from '../../../../hoc/withLoader';
 
 class Results extends PureComponent {
   static defaultProps = {
