@@ -3,7 +3,7 @@ import { Grid, Row, Col, Modal } from 'react-bootstrap';
 import Form from './components/form';
 import Results from './components/results';
 import Comments from './components/comments';
-import repoService from '../../services/repoService';
+import GitHub from '../../services/github';
 
 class Repositories extends Component {
   state = {
@@ -29,7 +29,7 @@ class Repositories extends Component {
       isFetchingComments: true, 
     });
 
-    repoService.getComments(repo)
+    GitHub.getComments(repo)
       .then(response => {
         const { data } = response;
         const comments = data.sort((curr, prev) => prev.id - curr.id);
@@ -59,7 +59,7 @@ class Repositories extends Component {
       isFetchingRepos: true,
     });
 
-    repoService.getRepositories(query)
+    GitHub.getRepositories(query)
       .then(response => {
         const { data: { items } } = response;
         this.setState({

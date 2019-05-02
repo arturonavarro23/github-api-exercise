@@ -1,0 +1,26 @@
+.profile {
+   margin-top: 20px;
+   text-align: left;
+
+   & img {
+      width: 100%;
+   }
+
+   .info {
+      display: inline-block;
+      margin-right: 10px;
+   }
+
+   h4 {
+      margin: 20px 0 0;
+   }
+
+   .repo {
+      padding: 10px;
+      border-bottom: 1px solid #e1e4e8!important;
+
+      & h5 {
+         color: #0366d6;
+      }
+   }
+}

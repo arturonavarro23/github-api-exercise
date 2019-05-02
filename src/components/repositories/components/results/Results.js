@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Grid, Row, Col, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import withLoader from '../.././../../hoc/withLoader';
 import './Results.scss';
 
@@ -8,19 +9,18 @@ class Results extends PureComponent {
     repositories: [],
   }
 
-  onRepoClick = repo => {
-    const { onRepositoryClick } = this.props;
-    onRepositoryClick(repo);
-  }
-
   renderRepository = repo => {
+    const { onRepositoryClick } = this.props;
     const { id, owner } = repo;
+    const onRePoClick = onRepositoryClick.bind(this, repo);
     return (
-      <Row key={id} className="result" onClick={this.onRepoClick.bind(this, repo)}>
+      <Row key={id} className="result">
         <Col xs={4}>
-          <Image height={50} src={owner.avatar_url} circle />
+          <Link to={`/user/${owner.login}`}>
+            <Image height={50} src={owner.avatar_url} circle />
+          </Link>
         </Col>
-        <Col xs={4}>
+        <Col xs={4} onClick={onRePoClick}>
           {repo.name}
         </Col>
         <Col xs={4}>

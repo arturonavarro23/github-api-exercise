@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Repositories from './repositories';
+import User from './user';
 import './App.scss';
 
 const App = () => {
@@ -9,10 +10,13 @@ const App = () => {
       <div className="App">
         <header className="App-header">
           <p>
-            Github API Exercise
+            <Link to="/">
+              Github API
+            </Link>
           </p>
         </header>
         <Route path="/" exact component={Repositories} />
+        <Route path="/user/:name" component={User} />
       </div>
     </BrowserRouter>
   );
