@@ -12,15 +12,16 @@ class Repositories extends Component {
     commentsModalOpen: false,
     isFetchingComments: false,
     comments: [],
-    inputValue: '',
+    query: 'facebook',
   }
 
-  onSearchFormSubmit = event => {
-    event.preventDefault();
-    const { inputValue } = this.state;
-    if (inputValue) {
-      this.searchResults(inputValue);
-    }
+  componentDidMount() {
+    this.searchResults();
+  }
+
+  onSearchFormSubmit = (e) => {
+    e.preventDefault();
+    this.searchResults();
   }
 
   onRepositoryClick = repo => {
@@ -54,7 +55,8 @@ class Repositories extends Component {
     });
   }
 
-  searchResults = (query) => {
+  searchResults = () => {
+    const { query } = this.state;
     this.setState({
       isFetchingRepos: true,
     });
@@ -77,7 +79,7 @@ class Repositories extends Component {
 
   onInputChange = (e) => {
     this.setState({
-      inputValue: e.target.value,
+      query: e.target.value,
     });
   }
   
@@ -88,7 +90,7 @@ class Repositories extends Component {
       commentsModalOpen,
       isFetchingComments,
       comments,
-      inputValue,
+      query,
     } = this.state;
 
     return (
@@ -97,7 +99,7 @@ class Repositories extends Component {
           <Row>
             <Col xs={12}>
               <Form
-                inputValue={inputValue}
+                inputValue={query}
                 onSubmit={this.onSearchFormSubmit}
                 onInputChange={this.onInputChange}
               />
