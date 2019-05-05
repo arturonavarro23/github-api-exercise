@@ -31,7 +31,7 @@ class UserProfile extends PureComponent {
 
   renderRepo = repo => (
     <Repo key={repo.id} repo={repo} />
-  );
+  )
 
   render() {
     const { user, hasError } = this.props;
