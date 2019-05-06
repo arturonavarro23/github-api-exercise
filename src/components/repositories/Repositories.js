@@ -6,25 +6,35 @@ import Comments from './components/comments';
 import GitHub from '../../services/github';
 
 class Repositories extends Component {
-  state = {
+ constructor(props) {
+   super(props);
+
+   this.state = {
     repositories: [],
     isFetchingRepos: false,
     commentsModalOpen: false,
     isFetchingComments: false,
     comments: [],
     query: 'facebook',
-  }
+  };
+
+  this.onSearchFormSubmit = this.onSearchFormSubmit.bind(this);
+  this.onRepositoryClick = this.onRepositoryClick.bind(this);
+  this.searchResults = this.searchResults.bind(this);
+  this.closeModal = this.closeModal.bind(this);
+  this.onInputChange = this.onInputChange.bind(this);
+ }
 
   componentDidMount() {
     this.searchResults();
   }
 
-  onSearchFormSubmit = (e) => {
+  onSearchFormSubmit(e) {
     e.preventDefault();
     this.searchResults();
   }
 
-  onRepositoryClick = repo => {
+  onRepositoryClick(repo) {
     this.setState({
       commentsModalOpen: true,
       isFetchingComments: true, 
@@ -33,10 +43,9 @@ class Repositories extends Component {
     GitHub.getComments(repo)
       .then(response => {
         const { data } = response;
-        const comments = data.sort((curr, prev) => prev.id - curr.id);
 
         this.setState({
-          comments:  comments.slice(0, 5),
+          comments:  data.slice(0, 5),
           isFetchingComments: false,
         });
       })
@@ -48,14 +57,14 @@ class Repositories extends Component {
       });
   }
 
-  closeModal = () => {
+  closeModal() {
     this.setState({
       isFetchingComments: true,
       commentsModalOpen: false,
     });
   }
 
-  searchResults = () => {
+  searchResults() {
     const { query } = this.state;
     this.setState({
       isFetchingRepos: true,
@@ -77,7 +86,7 @@ class Repositories extends Component {
       });
   }
 
-  onInputChange = (e) => {
+  onInputChange(e) {
     this.setState({
       query: e.target.value,
     });

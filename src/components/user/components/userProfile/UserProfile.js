@@ -6,20 +6,27 @@ import Repo from '../repo';
 import withLoader from '../.././../../hoc/withLoader';
 import './UserProfile.scss';
 
+@withLoader
 class UserProfile extends PureComponent {
-  state = {
-    query: '',
-    repos: [],
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      query: '',
+      repos: [],
+    };
+
+    this.onFilterChange = this.onFilterChange.bind(this);
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const { user: { repos } } = this.props;
     this.setState({
       repos: repos,
     });
   }
 
-  onFilterChange = (e) => {
+  onFilterChange(e) {
     const { user: { repos } } = this.props;
     const query = e.target.value;
     const filteredRepos = !query ? repos : repos.filter(r => r.name.includes(query));
@@ -86,4 +93,4 @@ class UserProfile extends PureComponent {
   }
 }
 
-export default withLoader(UserProfile);
+export default UserProfile;
